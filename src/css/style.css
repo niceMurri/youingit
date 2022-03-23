@@ -1,0 +1,220 @@
+
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+
+}
+a{
+    text-decoration: none;
+}
+ul{
+    list-style: none;
+}
+:root{
+    --black: #000409;
+    --black-light: #0c1117;
+    --white: #eff6fc;
+    --green: #17853e;
+    --dark-green: #105e2b;
+
+    /*
+ -> white
+ -> green */
+}
+body{
+    color: var(--white);
+
+    background-color: var(--black);
+    display: grid;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+}
+.container{
+    max-width: 65rem;
+    width: 100%;
+    margin: 0px 20px;
+    display: flex;
+    justify-content: center;
+}
+.container section{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+main{
+    padding: 20px;
+    border-radius: 5px;
+
+    box-shadow: 3px 3px 10px rgba(255, 255, 255, 0.062);
+    margin: 0 20px;
+    max-width: 450px;
+    min-width: 250px;
+    width: 100%;
+    background-color: var(--black-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* img */
+.perfil-img img{
+    max-width: 125px;
+    clip-path: circle();
+}
+.perfil-img figcaption{
+    text-align: center;
+    font-family: 'Fredoka',sans-serif;
+    color: white;
+    font-size: 1.3rem;
+}
+/* follow */
+.follow{
+    margin-top: 5px;
+    color: var(--white);
+    font-family: sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.follow a{
+    font-size: 0.9rem;
+    color: white;
+}
+.follow a{
+    font-size: 0.9rem;
+    color: rgb(168, 168, 168);
+}
+.follow a:hover, .follow a:hover span{
+    color: rgb(113, 135, 255);
+}
+.follow span{
+    color: white;
+}
+/* bio */
+#bio{
+    margin: 3px 0px;
+    font-family: sans-serif;
+    overflow: hidden;
+    text-align: center;
+    max-width: 420px;
+    width: 100%;
+    word-wrap: break-word;
+    line-height: 1.2rem;
+    font-size: 0.9rem;
+
+}
+/* hr */
+hr{
+    margin: 8px 0px;
+    border: 1px solid rgba(255, 255, 255, 0.418);
+    width: 100%;
+}
+/* my followers / my-followings */
+.my-followers,.my-followings{
+    width: 100%;
+    text-align: center;
+}
+.my-followers h3,.my-followings h3, .social-media h3{
+    font-family: sans-serif;
+    font-size: 0.9rem;
+    margin: 8px 0px;
+}
+
+
+.my-followers div,.my-followings div{
+    width: 100%;
+    height: 50px;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.171);
+    display: grid;
+    place-items: center;
+
+}
+.my-followers ul, .my-followings ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    overflow-x: hidden;
+
+}
+.my-followers ul a, .my-followings ul a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.my-followers ul a img, .my-followings ul a img{
+    clip-path: circle();
+    width: 40px;
+}
+/* social */
+.social-media{
+    text-align: center;
+}
+.social-media-links{
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+}
+.social-media-links div a{
+    color: var(--white);
+    font-size: 1.5rem;
+}
+
+
+
+/* form */
+#form{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    gap: 10px;
+}
+#form input{
+    height: 30px;
+    flex: 3;
+    padding: 10px;
+    border: 1px solid var(--white);
+    background-color: transparent;
+    outline: none;
+    pointer-events: stroke;
+    border-radius: 6px;
+    color: var(--white);
+}
+#form button{
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    flex: 1;
+    background-color: var(--green);
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    color: white;
+    transition: 0.3s ease;
+}
+#form button:hover{
+    
+    transform: translate(2px,1px);
+}
+
+
+.error{
+    font-size: 1rem;
+    color: rgb(197, 37, 37);
+    font-family: sans-serif;
+    border-bottom: 1px solid rgb(197, 37, 37);
+    animation-name: move;
+    animation-duration: 0.3s;
+}
+
+@keyframes move {
+    0% {transform: translateX(-20px);}
+    25%{transform: translateX(20px)}
+    50% {transform: translateX(-20px);}
+    75%{transform: translateX(20px)}
+    100%{transform: translateX(0px)}
+  }
