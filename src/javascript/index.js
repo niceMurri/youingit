@@ -1,3 +1,5 @@
+import genScreenShot from './screenshots.js'
+
 const form = document.querySelector('#form')
 
 const inputUser = document.querySelector('#git-user')
@@ -5,30 +7,28 @@ const inputUser = document.querySelector('#git-user')
 //get elements
 
 const sectionPerfilInfo = document.querySelector('.perfil-info')
-const perfilImg = document.querySelector('.perfil-img img');
-const perfilName = document.querySelector('.perfil-img figcaption');
-
+const perfilImg = document.querySelector('.perfil-img img')
+const perfilName = document.querySelector('.perfil-img figcaption')
 
 //follow and bio
-let linkFollowers;
-let numberFollowers;
+let linkFollowers
+let numberFollowers
 
-let linkFollowing;
-let numberFollowing;
+let linkFollowing
+let numberFollowing
 
-let bio;
+let bio
 
 //followers list
-let followersList;
+let followersList
 
 //following list
-let followingList;
+let followingList
 
 //social media
-let git;
-let twitter;
-let email;
-
+let git
+let twitter
+let email
 
 class myPerfilGit {
     constructor(form) {
@@ -56,9 +56,9 @@ class myPerfilGit {
     async perfilJSON(user) {
         try {
             const userInfo = await fetch(`https://api.github.com/users/${user}`)
-            const status = String(userInfo.status);
-            
-            if(status[0] !== '2') throw 'erro';
+            const status = String(userInfo.status)
+
+            if (status[0] !== '2') throw 'erro'
 
             const userJSON = await userInfo.json()
 
@@ -67,89 +67,115 @@ class myPerfilGit {
             sectionPerfilInfo.innerText = ''
 
             //remove img perfil and name
-            perfilImg.setAttribute('src', 'src/img/blank-perfil.jpg');
-            perfilImg.setAttribute('alt', 'Blank photo');
-            perfilName.innerText = 'Unknow';
-            
+            perfilImg.setAttribute('src', 'src/img/blank-perfil.jpg')
+            perfilImg.setAttribute('alt', 'Blank photo')
+            perfilName.innerText = 'Unknow'
+
             //create msg error
-            const p = document.createElement('p');
+            const p = document.createElement('p')
             p.innerText = 'User not exists'
             p.classList.add('error')
 
-            sectionPerfilInfo.appendChild(p);
+            sectionPerfilInfo.appendChild(p)
         }
     }
 
     async loadUser(userJSON) {
-        perfilImg.setAttribute('src',userJSON.avatar_url)
-        perfilImg.setAttribute('alt', 'Foto de ' + userJSON.login);
+        perfilImg.setAttribute('src', userJSON.avatar_url)
+        perfilImg.setAttribute('alt', 'Foto de ' + userJSON.login)
 
-        perfilName.innerText = userJSON.login;
-        
-        await this.loadPage();
-        
+        perfilName.innerText = userJSON.login
+
+        await this.loadPage()
+
         //followers
-        linkFollowers.setAttribute('href', `https://github.com/${userJSON.login}?tab=followers`);
-        numberFollowers.innerText = userJSON.followers;
-        
+
+        linkFollowers.setAttribute(
+            'href',
+            `https://github.com/${userJSON.login}?tab=followers`
+        )
+
+        numberFollowers.innerText = userJSON.followers
+
         //following
-        linkFollowing.setAttribute('href', `https://github.com/${userJSON.login}?tab=following`);
-        numberFollowing.innerText = userJSON.following;
+        linkFollowing.setAttribute(
+            'href',
+            `https://github.com/${userJSON.login}?tab=following`
+        )
+        numberFollowing.innerText = userJSON.following
 
         //bio
-        bio.innerText = userJSON.bio ? userJSON.bio : 'nothing in bio.';
+        bio.innerText = userJSON.bio ? userJSON.bio : 'nothing in bio.'
 
         //folowersList
-        this.loadFollow(followersList,userJSON.followers_url);
+        this.loadFollow(followersList, userJSON.followers_url)
 
         //followingList
-        this.loadFollow(followingList,`https://api.github.com/users/${userJSON.login}/following`);
+        this.loadFollow(
+            followingList,
+            `https://api.github.com/users/${userJSON.login}/following`
+        )
 
         //socialmedia
-        git.setAttribute('href', `https://github.com/${userJSON.login}`);
+        git.setAttribute('href', `https://github.com/${userJSON.login}`)
 
-        twitter.setAttribute('href', `https://twitter.com/${userJSON.twitter_username}`);
+        twitter.setAttribute(
+            'href',
+            `https://twitter.com/${userJSON.twitter_username}`
+        )
 
-        email.setAttribute('href', `emailto:${userJSON.email}`);
-
+        email.setAttribute('href', `emailto:${userJSON.email}`)
     }
-    async loadPage(){
-        const page = await fetch('section.html');
-        const pageHTML = await page.text();
+    async loadPage() {
+        const page = await fetch('section.html')
+        const pageHTML = await page.text()
+
+        const button = await fetch('button.html')
+        const buttonHTML = await button.text()
 
         //load page
-        sectionPerfilInfo.innerHTML = pageHTML;
+        sectionPerfilInfo.innerHTML = pageHTML
+        container.innerHTML += buttonHTML
+
+        //screenshot
+        const btn = document.querySelector('#screenshot')
+        const screen = document.querySelector('.container')
+
+        btn.addEventListener(
+            'click',
+            genScreenShot
+        )
 
         //followers
-        linkFollowers = document.querySelector('.followers');
-        numberFollowers = linkFollowers.querySelector('.number-followers');
+        linkFollowers = document.querySelector('.followers')
+        numberFollowers = linkFollowers.querySelector('.number-followers')
 
         //following
-        linkFollowing = document.querySelector('.following');
-        numberFollowing = linkFollowing.querySelector('.number-following');
+        linkFollowing = document.querySelector('.following')
+        numberFollowing = linkFollowing.querySelector('.number-following')
 
         //bio
-        bio = document.querySelector('#bio');
+        bio = document.querySelector('#bio')
 
         //followersList
-        followersList = document.querySelector('.followers-list');
+        followersList = document.querySelector('.followers-list')
 
         //followingList
-        followingList = document.querySelector('.following-list');
+        followingList = document.querySelector('.following-list')
 
         //socialmedia;
-        git = document.querySelector('.git');
-        twitter = document.querySelector('.twitter');
-        email = document.querySelector('.email');
+        git = document.querySelector('.git')
+        twitter = document.querySelector('.twitter')
+        email = document.querySelector('.email')
     }
 
-    async loadFollow(listElement, url){
-        listElement.innerText = '';
+    async loadFollow(listElement, url) {
+        listElement.innerText = ''
 
         try {
-            const follow = await (await fetch(url)).json();
-            
-            for(const user of follow){
+            const follow = await (await fetch(url)).json()
+
+            for (const user of follow) {
                 listElement.innerHTML += `
                 <li>
                     <a href="https://github.com/${user.login}" target="_blank">
@@ -157,13 +183,10 @@ class myPerfilGit {
                     </a>
                 </li>`
             }
-            
-
         } catch (erro) {
             console.error(erro)
         }
-
     }
 }
 
-const yourInGit = new myPerfilGit(form);
+const yourInGit = new myPerfilGit(form)

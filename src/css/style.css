@@ -22,6 +22,10 @@ ul{
  -> white
  -> green */
 }
+body,html{
+    width: 100vw;
+    
+}
 body{
     color: var(--white);
 
@@ -37,6 +41,8 @@ body{
     margin: 0px 20px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    position: relative;
 }
 .container section{
     width: 100%;
@@ -49,9 +55,8 @@ main{
     border-radius: 5px;
 
     box-shadow: 3px 3px 10px rgba(255, 255, 255, 0.062);
-    margin: 0 20px;
     max-width: 450px;
-    min-width: 250px;
+    
     width: 100%;
     background-color: var(--black-light);
     display: flex;
@@ -61,7 +66,7 @@ main{
 /* img */
 .perfil-img img{
     max-width: 125px;
-    clip-path: circle();
+    border-radius: 50%;
 }
 .perfil-img figcaption{
     text-align: center;
@@ -147,7 +152,7 @@ hr{
     align-items: center;
 }
 .my-followers ul a img, .my-followings ul a img{
-    clip-path: circle();
+    border-radius: 50%;
     width: 40px;
 }
 /* social */
@@ -199,6 +204,41 @@ hr{
 #form button:hover{
     
     transform: translate(2px,1px);
+}
+
+.btn{
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    transition: 0.3s ease;
+}
+.btn.download{
+    position: absolute;
+    background-color: var(--white);
+    color: var(--green);
+    right: 40px;
+}
+
+@media (max-width: 800px){
+    .container{
+        flex-direction: column;
+        width: 100%;
+        margin: 0px 20px;
+    }
+    .btn.download{
+        position: relative;
+        left: 0%;
+        margin-top: 20px;
+    }
+    #form{
+        flex-direction: column;
+    }
+    #form button{
+    padding: 10px 0px;    
+    }
 }
 
 
